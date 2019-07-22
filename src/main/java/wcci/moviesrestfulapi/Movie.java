@@ -6,26 +6,31 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Actor {
+public class Movie {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@OneToMany(mappedBy = "actor")
-	private Set<Movie> movies;
 
-	private String name;
+	@ManyToOne
+	private Actor actor;
 
-	public Actor(String name) {
-		this.name = name;
-		this.movies = new HashSet<>();
+	@OneToMany(mappedBy = "movie")
+	private Set<Scene> scenes;
+
+	private String title;
+
+	public Movie(Actor actor, String title) {
+		this.actor = actor;
+		this.title = title;
+		this.scenes = new HashSet<>();
 	}
 
-	public Actor() {
+	public Movie() {
 
 	}
 
@@ -33,12 +38,16 @@ public class Actor {
 		return id;
 	}
 
-	public Set<Movie> getMovies() {
-		return movies;
+	public Actor getActor() {
+		return actor;
 	}
 
-	public String getName() {
-		return name;
+	public Set<Scene> getScenes() {
+		return scenes;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	@Override
@@ -57,7 +66,7 @@ public class Actor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Actor other = (Actor) obj;
+		Movie other = (Movie) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
