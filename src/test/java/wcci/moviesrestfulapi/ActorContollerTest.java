@@ -21,8 +21,6 @@ public class ActorContollerTest {
 	private ActorRepository actorRepo;
 	@Mock
 	private Actor mockActor;
-	@Mock
-	private Actor mockActor2;
 
 	@Before
 	public void setup() {
@@ -34,10 +32,11 @@ public class ActorContollerTest {
 		when(actorRepo.findAll()).thenReturn(Collections.singletonList(mockActor));
 		assertThat(underTest.findAllActors(), contains(mockActor));
 	}
-    @Test
-    public void shouldReturnOneActor() {
-    	when(actorRepo.findById(1L)).thenReturn(Optional.of(mockActor));
-    	assertThat(underTest.findOneActor(1L), is(mockActor));
-    	
-    }
+
+	@Test
+	public void shouldReturnOneActor() {
+		when(actorRepo.findById(1L)).thenReturn(Optional.of(mockActor));
+		assertThat(underTest.findOneActor(1L), is(mockActor));
+
+	}
 }
