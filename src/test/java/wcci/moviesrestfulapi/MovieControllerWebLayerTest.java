@@ -54,7 +54,9 @@ public class MovieControllerWebLayerTest {
 	@Test
 	public void shouldReturnOneMovie() throws Exception {
 		when(movieRepo.findById(1L)).thenReturn(Optional.of(movie));
-		mockMvc.perform(get("/api/movies/1")).andExpect(status().isOk());
+		mockMvc.perform(get("/api/movies/1")).andExpect(status().isOk())
+				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("{}"))
+				.andExpect(content().json(mapper.writeValueAsString(movie), true));
 	}
 
 }
