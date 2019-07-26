@@ -19,39 +19,43 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(ActorController.class)
+@WebMvcTest(SceneController.class)
 @RunWith(SpringRunner.class)
-public class ActorControllerWebLayerTest {
+public class SceneControllerWebLayerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private ActorRepository actorRepo;
+	private SceneRepository sceneRepo;
 
 	private Actor actor;
-
+	private Movie movie;
+	private Scene scene;
 	private ObjectMapper mapper;
 
 	@Before
 	public void setup() {
-		actor = new Actor("name");
+		actor = new Actor("actor name");
+		movie = new Movie(actor, "movie name");
+		scene = new Scene(movie, "scene name");
 		mapper = new ObjectMapper();
 	}
 
 	@Test
-	public void shouldReturnAllActors() throws Exception {
-		when(actorRepo.findAll()).thenReturn(Collections.singletonList(actor));
-		mockMvc.perform(get("/api/actors")).andExpect(status().isOk())
+	public void shouldReturnAllScenes() throws Exception {
+		when(sceneRepo.findAll()).thenReturn(Collections.singletonList(scene));
+		mockMvc.perform(get("/api/scenes")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("[{}]"))
-				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor)), true));
+				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(scene)), true));
 	}
 
 	@Test
-	public void shouldReturnOneActor() throws Exception {
-		when(actorRepo.findById(1L)).thenReturn(Optional.of(actor));
-		mockMvc.perform(get("/api/actors/1")).andExpect(status().isOk())
+	public void shouldReturnOneScene() throws Exception {
+		when(sceneRepo.findById(1L)).thenReturn(Optional.of(scene));
+		mockMvc.perform(get("/api/scenes/1")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("{}"))
-				.andExpect(content().json(mapper.writeValueAsString(actor), true));
+				.andExpect(content().json(mapper.writeValueAsString(scene), true));
 	}
+
 }

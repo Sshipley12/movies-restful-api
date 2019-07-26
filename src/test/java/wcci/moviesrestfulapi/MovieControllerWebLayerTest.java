@@ -19,39 +19,44 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(ActorController.class)
+@WebMvcTest(MovieController.class)
 @RunWith(SpringRunner.class)
-public class ActorControllerWebLayerTest {
+public class MovieControllerWebLayerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private ActorRepository actorRepo;
+	private MovieRepository movieRepo;
 
 	private Actor actor;
+
+	private Movie movie;
 
 	private ObjectMapper mapper;
 
 	@Before
 	public void setup() {
-		actor = new Actor("name");
+		actor = new Actor("actor name");
+		movie = new Movie(actor, "movie name");
 		mapper = new ObjectMapper();
 	}
 
 	@Test
-	public void shouldReturnAllActors() throws Exception {
-		when(actorRepo.findAll()).thenReturn(Collections.singletonList(actor));
-		mockMvc.perform(get("/api/actors")).andExpect(status().isOk())
+	public void shouldReturnAllMovies() throws Exception {
+		when(movieRepo.findAll()).thenReturn(Collections.singletonList(movie));
+		mockMvc.perform(get("/api/movies")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("[{}]"))
-				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor)), true));
+				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(movie)), true));
+
 	}
 
 	@Test
-	public void shouldReturnOneActor() throws Exception {
-		when(actorRepo.findById(1L)).thenReturn(Optional.of(actor));
-		mockMvc.perform(get("/api/actors/1")).andExpect(status().isOk())
+	public void shouldReturnOneMovie() throws Exception {
+		when(movieRepo.findById(1L)).thenReturn(Optional.of(movie));
+		mockMvc.perform(get("/api/movies/1")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("{}"))
-				.andExpect(content().json(mapper.writeValueAsString(actor), true));
+				.andExpect(content().json(mapper.writeValueAsString(movie), true));
 	}
+
 }
