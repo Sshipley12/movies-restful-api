@@ -1,8 +1,8 @@
 package wcci.moviesrestfulapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +15,11 @@ public class ActorController {
 
 	@GetMapping("/actors")
 	public Iterable<Actor> findAllActors() {
-
 		return actorRepo.findAll();
 	}
 
-	public Actor findOneActor(Long id) {
-
+	@GetMapping("/actors/{id}")
+	public Actor findOneActor(@PathVariable Long id) {
 		return actorRepo.findById(id).get();
 	}
 
