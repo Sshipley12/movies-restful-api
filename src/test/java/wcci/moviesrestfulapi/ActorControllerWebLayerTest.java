@@ -1,6 +1,5 @@
 package wcci.moviesrestfulapi;
 
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -26,34 +25,33 @@ public class ActorControllerWebLayerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
-	@MockBean 
+
+	@MockBean
 	private ActorRepository actorRepo;
-	
+
 	private Actor actor;
-	
+
 	private ObjectMapper mapper;
-	
+
 	@Before
 	public void setup() {
 		actor = new Actor("name");
 		mapper = new ObjectMapper();
 	}
+
 	@Test
-    public void shouldReturnAllActors() throws Exception {
-        when(actorRepo.findAll()).thenReturn(Collections.singletonList(actor));
-        mockMvc.perform(get("/api/actors")).andExpect(status().isOk())
-        .andExpect(content().contentType("application/json;charset=UTF-8"))
-        .andExpect(content().json("[{}]"))
-        .andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor)), true));
-    }
-	
+	public void shouldReturnAllActors() throws Exception {
+		when(actorRepo.findAll()).thenReturn(Collections.singletonList(actor));
+		mockMvc.perform(get("/api/actors")).andExpect(status().isOk())
+				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("[{}]"))
+				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor)), true));
+	}
+
 	@Test
 	public void shouldReturnOneActor() throws Exception {
 		when(actorRepo.findById(1L)).thenReturn(Optional.of(actor));
 		mockMvc.perform(get("/api/actors/1")).andExpect(status().isOk())
-		.andExpect(content().contentType("application/json;charset=UTF-8"))
-        .andExpect(content().json("{}"))
-        .andExpect(content().json(mapper.writeValueAsString(actor), true));
+				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("{}"))
+				.andExpect(content().json(mapper.writeValueAsString(actor), true));
 	}
 }
