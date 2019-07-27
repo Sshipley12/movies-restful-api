@@ -32,5 +32,4 @@ public class ActorController {
 		actorRepo.save(actor);
 		return actorRepo.findAll();
 	}
-
 }
