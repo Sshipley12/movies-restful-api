@@ -32,12 +32,12 @@ public class ActorControllerWebLayerTest {
 	private ActorRepository actorRepo;
 	
 	private Actor actor;
-	private ObjectMapper mapper;
+	private ObjectMapper mapper = new ObjectMapper();
 
 	@Before
 	public void setup() {
 		actor = new Actor("name", "imageUrl");
-		mapper = new ObjectMapper();
+//		mapper = new ObjectMapper();
 	}
 
 	@Test
@@ -64,10 +64,10 @@ public class ActorControllerWebLayerTest {
 	public void shouldAddAnActor() throws Exception {
 		when(actorRepo.save(any(Actor.class))).thenReturn(actor);
 		when(actorRepo.findAll()).thenReturn(Collections.singletonList(actor));
-		mockMvc.perform(post("/api/actors"))
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(status().isOk())
-			.andExpect(content().json("[{}]"))
-			.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor)), true));
+		mockMvc.perform(post("/api/actors")
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsString(actor)))
+                .andExpect(status().isOk())
+				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(actor))));
 	}
 }
