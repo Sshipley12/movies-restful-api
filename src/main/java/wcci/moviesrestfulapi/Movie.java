@@ -15,18 +15,18 @@ public class Movie {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	private String title;
+	private String imageUrl;
 	@ManyToOne
 	private Actor actor;
 
 	@OneToMany(mappedBy = "movie")
 	private Set<Scene> scenes;
 
-	private String title;
-
-	public Movie(Actor actor, String title) {
+	public Movie(Actor actor, String title, String imageUrl) {
 		this.actor = actor;
 		this.title = title;
+		this.imageUrl = imageUrl;
 		this.scenes = new HashSet<>();
 	}
 
@@ -38,16 +38,20 @@ public class Movie {
 		return id;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
 	public Actor getActor() {
 		return actor;
 	}
 
 	public Set<Scene> getScenes() {
 		return scenes;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	@Override

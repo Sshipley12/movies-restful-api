@@ -37,11 +37,11 @@ public class JpaMappingTest {
 
 	@Before
 	public void setUp() {
-		actor = new Actor("name");
+		actor = new Actor("name", "imageUrl");
 		actorRepo.save(actor);
-		movie1 = new Movie(actor, "movie title 1");
+		movie1 = new Movie(actor, "movie title 1", "imageUrl");
 		movieRepo.save(movie1);
-		movie2 = new Movie(actor, "movie title 2");
+		movie2 = new Movie(actor, "movie title 2", "imageUrl");
 		movieRepo.save(movie2);
 		scene1 = new Scene(movie1, "scene1");
 		sceneRepo.save(scene1);

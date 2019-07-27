@@ -36,8 +36,8 @@ public class SceneControllerWebLayerTest {
 
 	@Before
 	public void setup() {
-		actor = new Actor("actor name");
-		movie = new Movie(actor, "movie name");
+		actor = new Actor("actor name", "imageUrl");
+		movie = new Movie(actor, "movie name", "imageUrl");
 		scene = new Scene(movie, "scene name");
 		mapper = new ObjectMapper();
 	}

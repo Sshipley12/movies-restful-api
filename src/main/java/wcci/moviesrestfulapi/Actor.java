@@ -14,14 +14,14 @@ public class Actor {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	private String name;
+	private String imageUrl;
 	@OneToMany(mappedBy = "actor")
 	private Set<Movie> movies;
 
-	private String name;
-
-	public Actor(String name) {
+	public Actor(String name, String imageUrl) {
 		this.name = name;
+		this.imageUrl = imageUrl;
 		this.movies = new HashSet<>();
 	}
 
@@ -33,12 +33,16 @@ public class Actor {
 		return id;
 	}
 
-	public Set<Movie> getMovies() {
-		return movies;
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public Set<Movie> getMovies() {
+		return movies;
 	}
 
 	@Override

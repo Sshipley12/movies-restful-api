@@ -2,6 +2,8 @@ package wcci.moviesrestfulapi;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
@@ -12,9 +14,9 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.hamcrest.Matchers.contains;
 
 public class ActorContollerTest {
+
 	@InjectMocks
 	private ActorController underTest;
 	@Mock
@@ -38,5 +40,12 @@ public class ActorContollerTest {
 		when(actorRepo.findById(1L)).thenReturn(Optional.of(mockActor));
 		assertThat(underTest.findOneActor(1L), is(mockActor));
 
+	}
+
+	@Test
+	public void shouldSaveAnActor() {
+		Actor actorToSave = new Actor("name", "imageUrl");
+		underTest.createActor(actorToSave);
+		verify(actorRepo).save(actorToSave);
 	}
 }
