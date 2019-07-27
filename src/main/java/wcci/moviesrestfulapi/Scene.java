@@ -11,11 +11,9 @@ public class Scene {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	private String name;
 	@ManyToOne
 	private Movie movie;
-
-	private String name;
 
 	public Scene(Movie movie, String name) {
 		this.movie = movie;
@@ -26,17 +24,16 @@ public class Scene {
 
 	}
 
-
 	public Long getId() {
 		return id;
 	}
 
-	public Movie getMovie() {
-		return movie;
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public Movie getMovie() {
+		return movie;
 	}
 
 	@Override
