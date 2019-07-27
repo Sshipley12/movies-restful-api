@@ -4,6 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import wcci.moviesrestfulapi.models.Actor;
+import wcci.moviesrestfulapi.models.Movie;
+import wcci.moviesrestfulapi.models.Scene;
+import wcci.moviesrestfulapi.repositories.ActorRepository;
+import wcci.moviesrestfulapi.repositories.MovieRepository;
+import wcci.moviesrestfulapi.repositories.SceneRepository;
+
 @Service
 public class Initializer implements CommandLineRunner {
 	

@@ -1,4 +1,4 @@
-package wcci.moviesrestfulapi;
+package wcci.moviesrestfulapi.controllers;
 
 
 import static org.hamcrest.CoreMatchers.is;
@@ -14,6 +14,10 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import wcci.moviesrestfulapi.controllers.MovieController;
+import wcci.moviesrestfulapi.models.Movie;
+import wcci.moviesrestfulapi.repositories.MovieRepository;
 
 public class MovieControllerTest {
 	

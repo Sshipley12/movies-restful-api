@@ -1,4 +1,4 @@
-package wcci.moviesrestfulapi;
+package wcci.moviesrestfulapi.web_layer_tests;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -21,6 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import wcci.moviesrestfulapi.controllers.ActorController;
+import wcci.moviesrestfulapi.models.Actor;
+import wcci.moviesrestfulapi.repositories.ActorRepository;
 
 @WebMvcTest(ActorController.class)
 @RunWith(SpringRunner.class)

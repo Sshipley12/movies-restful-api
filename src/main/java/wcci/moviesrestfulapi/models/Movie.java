@@ -1,4 +1,4 @@
-package wcci.moviesrestfulapi;
+package wcci.moviesrestfulapi.models;
 
 import java.util.HashSet;
 import java.util.Set;

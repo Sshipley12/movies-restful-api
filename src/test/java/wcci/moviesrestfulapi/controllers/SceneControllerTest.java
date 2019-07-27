@@ -1,4 +1,4 @@
-package wcci.moviesrestfulapi;
+package wcci.moviesrestfulapi.controllers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -13,6 +13,10 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import wcci.moviesrestfulapi.controllers.SceneController;
+import wcci.moviesrestfulapi.models.Scene;
+import wcci.moviesrestfulapi.repositories.SceneRepository;
 
 public class SceneControllerTest {
 	

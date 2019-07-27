@@ -1,31 +1,26 @@
-package wcci.moviesrestfulapi;
-
-import java.util.HashSet;
-import java.util.Set;
+package wcci.moviesrestfulapi.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Actor {
+public class Scene {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
-	private String imageUrl;
-	@OneToMany(mappedBy = "actor")
-	private Set<Movie> movies;
+	@ManyToOne
+	private Movie movie;
 
-	public Actor(String name, String imageUrl) {
+	public Scene(Movie movie, String name) {
+		this.movie = movie;
 		this.name = name;
-		this.imageUrl = imageUrl;
-		this.movies = new HashSet<>();
 	}
 
-	public Actor() {
+	public Scene() {
 
 	}
 
@@ -37,12 +32,8 @@ public class Actor {
 		return name;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public Set<Movie> getMovies() {
-		return movies;
+	public Movie getMovie() {
+		return movie;
 	}
 
 	@Override
@@ -61,7 +52,7 @@ public class Actor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Actor other = (Actor) obj;
+		Scene other = (Scene) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

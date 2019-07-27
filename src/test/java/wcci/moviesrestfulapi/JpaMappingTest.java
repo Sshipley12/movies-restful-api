@@ -13,6 +13,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import wcci.moviesrestfulapi.models.Actor;
+import wcci.moviesrestfulapi.models.Movie;
+import wcci.moviesrestfulapi.models.Scene;
+import wcci.moviesrestfulapi.repositories.ActorRepository;
+import wcci.moviesrestfulapi.repositories.MovieRepository;
+import wcci.moviesrestfulapi.repositories.SceneRepository;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class JpaMappingTest {

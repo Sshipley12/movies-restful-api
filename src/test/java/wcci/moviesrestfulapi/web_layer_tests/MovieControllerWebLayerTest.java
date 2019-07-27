@@ -1,4 +1,4 @@
-package wcci.moviesrestfulapi;
+package wcci.moviesrestfulapi.web_layer_tests;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,43 +19,49 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(SceneController.class)
+import wcci.moviesrestfulapi.controllers.MovieController;
+import wcci.moviesrestfulapi.models.Actor;
+import wcci.moviesrestfulapi.models.Movie;
+import wcci.moviesrestfulapi.repositories.MovieRepository;
+
+@WebMvcTest(MovieController.class)
 @RunWith(SpringRunner.class)
-public class SceneControllerWebLayerTest {
+public class MovieControllerWebLayerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private SceneRepository sceneRepo;
+	private MovieRepository movieRepo;
 
 	private Actor actor;
+
 	private Movie movie;
-	private Scene scene;
+
 	private ObjectMapper mapper;
 
 	@Before
 	public void setup() {
 		actor = new Actor("actor name", "imageUrl");
 		movie = new Movie(actor, "movie name", "imageUrl");
-		scene = new Scene(movie, "scene name");
 		mapper = new ObjectMapper();
 	}
 
 	@Test
-	public void shouldReturnAllScenes() throws Exception {
-		when(sceneRepo.findAll()).thenReturn(Collections.singletonList(scene));
-		mockMvc.perform(get("/api/scenes")).andExpect(status().isOk())
+	public void shouldReturnAllMovies() throws Exception {
+		when(movieRepo.findAll()).thenReturn(Collections.singletonList(movie));
+		mockMvc.perform(get("/api/movies")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("[{}]"))
-				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(scene)), true));
+				.andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(movie)), true));
+
 	}
 
 	@Test
-	public void shouldReturnOneScene() throws Exception {
-		when(sceneRepo.findById(1L)).thenReturn(Optional.of(scene));
-		mockMvc.perform(get("/api/scenes/1")).andExpect(status().isOk())
+	public void shouldReturnOneMovie() throws Exception {
+		when(movieRepo.findById(1L)).thenReturn(Optional.of(movie));
+		mockMvc.perform(get("/api/movies/1")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8")).andExpect(content().json("{}"))
-				.andExpect(content().json(mapper.writeValueAsString(scene), true));
+				.andExpect(content().json(mapper.writeValueAsString(movie), true));
 	}
 
 }
