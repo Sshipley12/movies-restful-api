@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Scene {
 
@@ -13,6 +15,7 @@ public class Scene {
 	private Long id;
 	private String name;
 	@ManyToOne
+	@JsonIgnore
 	private Movie movie;
 
 	public Scene(Movie movie, String name) {

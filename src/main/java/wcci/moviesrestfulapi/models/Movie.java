@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Movie {
 
@@ -18,6 +20,7 @@ public class Movie {
 	private String title;
 	private String imageUrl;
 	@ManyToOne
+	@JsonIgnore
 	private Actor actor;
 
 	@OneToMany(mappedBy = "movie")
