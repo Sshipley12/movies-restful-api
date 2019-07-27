@@ -23,7 +23,7 @@ public class Scene {
 		this.name = name;
 	}
 
-	public Scene() {
+	protected Scene() {
 
 	}
 

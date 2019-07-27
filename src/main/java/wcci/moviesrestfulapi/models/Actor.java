@@ -25,7 +25,7 @@ public class Actor {
 		this.movies = new HashSet<>();
 	}
 
-	public Actor() {
+	protected Actor() {
 
 	}
 

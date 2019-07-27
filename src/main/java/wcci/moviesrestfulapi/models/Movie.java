@@ -33,7 +33,7 @@ public class Movie {
 		this.scenes = new HashSet<>();
 	}
 
-	public Movie() {
+	protected Movie() {
 
 	}
 
