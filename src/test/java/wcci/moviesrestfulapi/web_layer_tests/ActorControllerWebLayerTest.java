@@ -36,12 +36,12 @@ public class ActorControllerWebLayerTest {
 	private ActorRepository actorRepo;
 	
 	private Actor actor;
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
 
 	@Before
 	public void setup() {
 		actor = new Actor("name", "imageUrl");
-//		mapper = new ObjectMapper();
+		mapper = new ObjectMapper();
 	}
 
 	@Test
