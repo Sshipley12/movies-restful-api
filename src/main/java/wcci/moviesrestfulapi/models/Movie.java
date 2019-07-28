@@ -19,6 +19,7 @@ public class Movie {
 	private Long id;
 	private String title;
 	private String imageUrl;
+	private String description;
 	@ManyToOne
 	@JsonIgnore
 	private Actor actor;
@@ -26,10 +27,11 @@ public class Movie {
 	@OneToMany(mappedBy = "movie")
 	private Set<Scene> scenes;
 
-	public Movie(Actor actor, String title, String imageUrl) {
+	public Movie(Actor actor, String title, String imageUrl, String description) {
 		this.actor = actor;
 		this.title = title;
 		this.imageUrl = imageUrl;
+		this.description = description;
 		this.scenes = new HashSet<>();
 	}
 
@@ -47,6 +49,10 @@ public class Movie {
 
 	public String getImageUrl() {
 		return imageUrl;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public Actor getActor() {

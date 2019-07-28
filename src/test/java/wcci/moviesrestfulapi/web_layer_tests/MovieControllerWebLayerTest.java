@@ -42,8 +42,8 @@ public class MovieControllerWebLayerTest {
 
 	@Before
 	public void setup() {
-		actor = new Actor("actor name", "imageUrl");
-		movie = new Movie(actor, "movie name", "imageUrl");
+		actor = new Actor("actor name", "imageUrl", "age");
+		movie = new Movie(actor, "movie name", "imageUrl", "description");
 		mapper = new ObjectMapper();
 	}
 

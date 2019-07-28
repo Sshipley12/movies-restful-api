@@ -16,12 +16,14 @@ public class Actor {
 	private Long id;
 	private String name;
 	private String imageUrl;
+	private String age;
 	@OneToMany(mappedBy = "actor")
 	private Set<Movie> movies;
 
-	public Actor(String name, String imageUrl) {
+	public Actor(String name, String imageUrl, String age) {
 		this.name = name;
 		this.imageUrl = imageUrl;
+		this.age = age;
 		this.movies = new HashSet<>();
 	}
 
@@ -39,6 +41,10 @@ public class Actor {
 
 	public String getImageUrl() {
 		return imageUrl;
+	}
+
+	public String getAge() {
+		return age;
 	}
 
 	public Set<Movie> getMovies() {
