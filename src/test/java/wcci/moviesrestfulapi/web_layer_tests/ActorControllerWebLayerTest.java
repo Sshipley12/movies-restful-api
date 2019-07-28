@@ -40,7 +40,7 @@ public class ActorControllerWebLayerTest {
 
 	@Before
 	public void setup() {
-		actor = new Actor("name", "imageUrl");
+		actor = new Actor("name", "imageUrl", "age");
 		mapper = new ObjectMapper();
 	}
 

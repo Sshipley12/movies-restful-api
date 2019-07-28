@@ -14,13 +14,15 @@ public class Scene {
 	@GeneratedValue
 	private Long id;
 	private String name;
+	private String link;
 	@ManyToOne
 	@JsonIgnore
 	private Movie movie;
 
-	public Scene(Movie movie, String name) {
+	public Scene(Movie movie, String name, String link) {
 		this.movie = movie;
 		this.name = name;
+		this.link = link;
 	}
 
 	protected Scene() {
@@ -33,6 +35,10 @@ public class Scene {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getLink() {
+		return link;
 	}
 
 	public Movie getMovie() {

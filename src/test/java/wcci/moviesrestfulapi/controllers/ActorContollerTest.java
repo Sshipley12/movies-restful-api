@@ -48,7 +48,7 @@ public class ActorContollerTest {
 
 	@Test
 	public void shouldSaveAnActor() {
-		Actor actorToSave = new Actor("name", "imageUrl");
+		Actor actorToSave = new Actor("name", "imageUrl", "age");
 		underTest.createActor(actorToSave);
 		verify(actorRepo).save(actorToSave);
 	}
