@@ -28,7 +28,7 @@ class Components {
 				}
 				let image = item.imageUrl;
 				if (!image) {
-					url = picture;
+					image = picture;
 				}
 				const cardBlock = Html().create('article').addClass('card');
 				const cardLink = Html().create('a').addClass('card__link').addAttribute('href', `/${requestedData}/${item.id}`)
@@ -152,7 +152,7 @@ class Components {
 		const app = this.getAppContext();
 		const wrapperDiv = this.getWrapperDiv();
 		const header = this.renderMainHeader();
-		const content = this.renderMainContent('movies');
+		const content = this.renderMainContent('actors');
 		const footer = this.renderMainFooter();
 		wrapperDiv.addChild(header);
 		wrapperDiv.addChild(content);
