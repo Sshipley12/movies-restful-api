@@ -34,14 +34,13 @@ class Components {
 				const cardLink = Html().create('a').addClass('card__link').addAttribute('href', `/${requestedData}/${item.id}`)
 					.click((event) => {
 						event.preventDefault();
-						const endpoint = event.target.getAttribute('href');
-						Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
-							this.renderPageSingle(data, endpoint)
+						Api().getRequest(`http://localhost:8080/api/${requestedData}/${item.id}`, (data) => {
+							this.renderPageSingle(data, requestedData)
 						})
 					});
 				const imgContainer = Html().create('figure').addClass('card__image')
-					.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', image))
-					.addAttribute('alt', 'atl pic');
+					.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', image)
+						.addAttribute('alt', 'atl pic'));
 				const cardContent = Html().create('div').addClass('card__content')
 					.addChild(Html().create('h3').addClass('card__content-item').text(name));
 				cardLink.addChild(imgContainer);
@@ -112,31 +111,93 @@ class Components {
 	}
 
 	renderPageActor(data) {
-		const currentMainContentBlock = this.getWrapperDiv().select('.container').select('.content');
-		const name = Html().create('h2').addClass('content__title').text(data.name);
-		currentMainContentBlock.replace(name);
+		const currentContainerBlock = this.getWrapperDiv().select('.container');
+		const content = Html().create('section').addClass('content');
+		const contentTitle = Html().create('h2').addClass('content__title').text(data.name);
+		const cardsContainer = Html().create('section').addClass('cards')
+
+		const cardBlock = Html().create('article').addClass('card');
+		const imgContainer = Html().create('figure').addClass('card__image')
+			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', data.imageUrl)
+				.addAttribute('alt', 'atl pic'));
+		const cardContent = Html().create('div').addClass('card__content')
+		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(data.name);
+		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(`Age: ${data.age}`)
+		cardContent.addChild(cardContentItem1);
+		cardContent.addChild(cardContentItem2);
+		cardBlock.addChild(imgContainer);
+		cardBlock.addChild(cardContent);
+		cardsContainer.addChild(cardBlock);
+		content.addChild(contentTitle);
+		content.addChild(cardsContainer);
+		currentContainerBlock.replace(content);
 	}
 
 	renderPageActors() {
-		const currentMainContentBlock = this.getWrapperDiv().select(".container");
-		currentMainContentBlock.replace(this.renderContentBlock("actors"));
+		const currentContainerBlock = this.getWrapperDiv().select(".container");
+		currentContainerBlock.replace(this.renderContentBlock("actors"));
 
+	}
+
+	renderPageMovie(data) {
+		const currentContainerBlock = this.getWrapperDiv().select('.container');
+		const content = Html().create('section').addClass('content');
+		const contentTitle = Html().create('h2').addClass('content__title').text(data.title);
+		const cardsContainer = Html().create('section').addClass('cards')
+
+		const cardBlock = Html().create('article').addClass('card');
+		const imgContainer = Html().create('figure').addClass('card__image')
+			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', data.imageUrl)
+				.addAttribute('alt', 'atl pic'));
+		const cardContent = Html().create('div').addClass('card__content')
+		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(data.title);
+		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(`${data.description}`)
+		cardContent.addChild(cardContentItem1);
+		cardContent.addChild(cardContentItem2);
+		cardBlock.addChild(imgContainer);
+		cardBlock.addChild(cardContent);
+		cardsContainer.addChild(cardBlock);
+		content.addChild(contentTitle);
+		content.addChild(cardsContainer);
+		currentContainerBlock.replace(content);
 	}
 
 	renderPageMovies() {
-		const currentMainContentBlock = this.getWrapperDiv().select(".container");
-		currentMainContentBlock.replace(this.renderContentBlock("movies"));
+		const currentContainerBlock = this.getWrapperDiv().select(".container");
+		currentContainerBlock.replace(this.renderContentBlock("movies"));
+	}
+
+	renderPageScene(data) {
+		const currentContainerBlock = this.getWrapperDiv().select('.container');
+		const content = Html().create('section').addClass('content');
+		const contentTitle = Html().create('h2').addClass('content__title').text(data.name);
+		const cardsContainer = Html().create('section').addClass('cards')
+
+		const cardBlock = Html().create('article').addClass('card');
+		const cardLink = Html().create('a').addClass('card__link').addAttribute('href', data.link).addAttribute('target', '_blank');
+		const imgContainer = Html().create('figure').addClass('card__image')
+			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', picture)
+				.addAttribute('alt', 'atl pic'));
+		const cardContent = Html().create('div').addClass('card__content')
+		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(data.name);
+		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(`Watch Scene`)
+		cardContent.addChild(cardContentItem1);
+		cardContent.addChild(cardContentItem2);
+		cardLink.addChild(imgContainer);
+		cardLink.addChild(cardContent);
+		cardBlock.addChild(cardLink);
+		cardsContainer.addChild(cardBlock);
+		content.addChild(contentTitle);
+		content.addChild(cardsContainer);
+		currentContainerBlock.replace(content);
 	}
 
 	renderPageScenes() {
-		const currentMainContentBlock = this.getWrapperDiv().select(".container");
-		currentMainContentBlock.replace(this.renderContentBlock("scenes"));
+		const currentContainerBlock = this.getWrapperDiv().select(".container");
+		currentContainerBlock.replace(this.renderContentBlock("scenes"));
 	}
 
-	renderPageSingle(data, endpoint) {
-		console.log(endpoint)
-		const typeOfObject = endpoint.split('/')[1]
-		console.log(typeOfObject)
+	renderPageSingle(data, typeOfObject) {
 		if (typeOfObject === 'actors') {
 			this.renderPageActor(data);
 		}
