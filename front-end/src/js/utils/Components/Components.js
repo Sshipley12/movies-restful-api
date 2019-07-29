@@ -35,7 +35,7 @@ class Components {
 					.click((event) => {
 						event.preventDefault();
 						Api().getRequest(`http://localhost:8080/api/${requestedData}/${item.id}`, (data) => {
-							this.renderPageSingle(data, requestedData)
+							this.renderPageSingleCheck(data, requestedData)
 						})
 					});
 				const imgContainer = Html().create('figure').addClass('card__image')
@@ -111,27 +111,9 @@ class Components {
 	}
 
 	renderPageActor(data) {
-		const currentContainerBlock = this.getWrapperDiv().select('.container');
-		const content = Html().create('section').addClass('content');
-		const contentTitle = Html().create('h2').addClass('content__title').text(data.name);
-		const cardsContainer = Html().create('section').addClass('cards')
-
-		const cardBlock = Html().create('article').addClass('card');
-		const imgContainer = Html().create('figure').addClass('card__image')
-			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', data.imageUrl)
-				.addAttribute('alt', 'atl pic'));
-		const cardContent = Html().create('div').addClass('card__content')
-		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(data.name);
-		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(`Age: ${data.age}`)
-		cardContent.addChild(cardContentItem1);
-		cardContent.addChild(cardContentItem2);
-		cardBlock.addChild(imgContainer);
-		cardBlock.addChild(cardContent);
-		cardsContainer.addChild(cardBlock);
-		content.addChild(contentTitle);
-		content.addChild(cardsContainer);
-		currentContainerBlock.replace(content);
+		this.renderPageSingle(data);
 	}
+
 
 	renderPageActors() {
 		const currentContainerBlock = this.getWrapperDiv().select(".container");
@@ -140,26 +122,7 @@ class Components {
 	}
 
 	renderPageMovie(data) {
-		const currentContainerBlock = this.getWrapperDiv().select('.container');
-		const content = Html().create('section').addClass('content');
-		const contentTitle = Html().create('h2').addClass('content__title').text(data.title);
-		const cardsContainer = Html().create('section').addClass('cards')
-
-		const cardBlock = Html().create('article').addClass('card');
-		const imgContainer = Html().create('figure').addClass('card__image')
-			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', data.imageUrl)
-				.addAttribute('alt', 'atl pic'));
-		const cardContent = Html().create('div').addClass('card__content')
-		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(data.title);
-		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(`${data.description}`)
-		cardContent.addChild(cardContentItem1);
-		cardContent.addChild(cardContentItem2);
-		cardBlock.addChild(imgContainer);
-		cardBlock.addChild(cardContent);
-		cardsContainer.addChild(cardBlock);
-		content.addChild(contentTitle);
-		content.addChild(cardsContainer);
-		currentContainerBlock.replace(content);
+		this.renderPageSingle(data);
 	}
 
 	renderPageMovies() {
@@ -172,7 +135,6 @@ class Components {
 		const content = Html().create('section').addClass('content');
 		const contentTitle = Html().create('h2').addClass('content__title').text(data.name);
 		const cardsContainer = Html().create('section').addClass('cards')
-
 		const cardBlock = Html().create('article').addClass('card');
 		const cardLink = Html().create('a').addClass('card__link').addAttribute('href', data.link).addAttribute('target', '_blank');
 		const imgContainer = Html().create('figure').addClass('card__image')
@@ -197,7 +159,38 @@ class Components {
 		currentContainerBlock.replace(this.renderContentBlock("scenes"));
 	}
 
-	renderPageSingle(data, typeOfObject) {
+	renderPageSingle(data) {
+		const currentContainerBlock = this.getWrapperDiv().select('.container');
+		const content = Html().create('section').addClass('content');
+		let info1 = data.name;
+		if (data.title) {
+			info1 = data.title;
+		}
+		let info2 = `Age: ${data.age}`;
+		if (data.description) {
+			info2 = data.description;
+		}
+		let img = data.imageUrl;
+		const contentTitle = Html().create('h2').addClass('content__title').text(info1);
+		const cardsContainer = Html().create('section').addClass('cards');
+		const cardBlock = Html().create('article').addClass('card');
+		const imgContainer = Html().create('figure').addClass('card__image')
+			.addChild(Html().create('img').addClass('card__image-item').addAttribute('src', img)
+				.addAttribute('alt', 'atl pic'));
+		const cardContent = Html().create('div').addClass('card__content');
+		const cardContentItem1 = Html().create('h3').addClass('card__content-item').text(info1);
+		const cardContentItem2 = Html().create('p').addClass('card__content-item').text(info2);
+		cardContent.addChild(cardContentItem1);
+		cardContent.addChild(cardContentItem2);
+		cardBlock.addChild(imgContainer);
+		cardBlock.addChild(cardContent);
+		cardsContainer.addChild(cardBlock);
+		content.addChild(contentTitle);
+		content.addChild(cardsContainer);
+		currentContainerBlock.replace(content);
+	}
+
+	renderPageSingleCheck(data, typeOfObject) {
 		if (typeOfObject === 'actors') {
 			this.renderPageActor(data);
 		}
